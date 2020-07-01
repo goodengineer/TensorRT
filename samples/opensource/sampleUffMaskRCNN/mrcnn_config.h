@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+
+//Modifications by P.E.Mazniker(http://swhwengineering.webs.com
+
 #ifndef MASKRCNN_CONFIG_HEADER
 #define MASKRCNN_CONFIG_HEADER
 #include "NvInfer.h"
@@ -37,7 +40,7 @@ static const float RPN_BBOX_STD_DEV[] = {0.1, 0.1, 0.2, 0.2};
 static const float BBOX_STD_DEV[] = {0.1, 0.1, 0.2, 0.2};
 
 // Max number of final detections
-static const int DETECTION_MAX_INSTANCES = 100;
+static const int DETECTION_MAX_INSTANCES = 200;
 
 // Minimum probability value to accept a detected instance
 // ROIs below this threshold are skipped
@@ -57,7 +60,7 @@ static const int FPN_CLASSIF_FC_LAYERS_SIZE = 1024;
 static const int TOP_DOWN_PYRAMID_SIZE = 256;
 
 // Number of classification classes (including background)
-static const int NUM_CLASSES = 1 + 80; // COCO has 80 classes
+static const int NUM_CLASSES = 1 + 72; // Custom Dental has 72 classes(asper VoTT project)
 
 // Length of square anchor side in pixels
 static const std::vector<float> RPN_ANCHOR_SCALES = {32, 64, 128, 256, 512};
@@ -82,92 +85,84 @@ static const float RPN_NMS_THRESHOLD = 0.7;
 // ROIs kept after non-maximum suppression (training and inference)
 static const int POST_NMS_ROIS_INFERENCE = 1000;
 
-// COCO Class names
+// Custom Dental Categories to Detect as per VoTT Project Class names
 static const std::vector<std::string> CLASS_NAMES = {
-    "BG",
-    "person",
-    "bicycle",
-    "car",
-    "motorcycle",
-    "airplane",
-    "bus",
-    "train",
-    "truck",
-    "boat",
-    "traffic light",
-    "fire hydrant",
-    "stop sign",
-    "parking meter",
-    "bench",
-    "bird",
-    "cat",
-    "dog",
-    "horse",
-    "sheep",
-    "cow",
-    "elephant",
-    "bear",
-    "zebra",
-    "giraffe",
-    "backpack",
-    "umbrella",
-    "handbag",
-    "tie",
-    "suitcase",
-    "frisbee",
-    "skis",
-    "snowboard",
-    "sports ball",
-    "kite",
-    "baseball bat",
-    "baseball glove",
-    "skateboard",
-    "surfboard",
-    "tennis racket",
-    "bottle",
-    "wine glass",
-    "cup",
-    "fork",
-    "knife",
-    "spoon",
-    "bowl",
-    "banana",
-    "apple",
-    "sandwich",
-    "orange",
-    "broccoli",
-    "carrot",
-    "hot dog",
-    "pizza",
-    "donut",
-    "cake",
-    "chair",
-    "couch",
-    "potted plant",
-    "bed",
-    "dining table",
-    "toilet",
-    "tv",
-    "laptop",
-    "mouse",
-    "remote",
-    "keyboard",
-    "cell phone",
-    "microwave",
-    "oven",
-    "toaster",
-    "sink",
-    "refrigerator",
-    "book",
-    "clock",
-    "vase",
-    "scissors",
-    "teddy bear",
-    "hair drier",
-    "toothbrush",
+    "tags": [
+        "DecayA1",
+        "Restoration",
+        "EndodonticA1",
+        "ImplantA1",
+        "CrownA1",
+        "CariesA1",
+        "OcclusialFilling",
+        "MessialFilling",
+        "Composite(Amalgam)Filling",
+        "LingualFilling(Apron)",
+        "DistalFilling",
+        "ApicalLesion",
+        "Pontic",
+        "AmalgamFilling",
+        "BiteSplint",
+        "Abutment",
+        "Bridge",
+        "Clasp",
+        "MissingTooth",
+        "GenericFilling",
+        "GenericCaries",
+        "PathogenicTeethGapA1",
+        "ChippedOrBrokenTooth",
+        "MultipleSurfaceFilling",
+        "LabialFilling",
+        "InferiorAlveolarNerve(IAN)",
+        "AnteriorMentalNerve(AMN)Loop",
+        "Bifid(Bilateral)MandibularChannel",
+        "MoxillaryFissure",
+        "RootPossition",
+        "Tooth18",
+        "Tooth17",
+        "Tooth16",
+        "Tooth15",
+        "Tooth14",
+        "Tooth12",
+        "Tooth13",
+        "Tooth11",
+        "Tooth21",
+        "Tooth22",
+        "Tooth23",
+        "Tooth24",
+        "Tooth25",
+        "Tooth26",
+        "Tooth27",
+        "Tooth28",
+        "Tooth48",
+        "Tooth47",
+        "Tooth46",
+        "Tooth45",
+        "Tooth44",
+        "Tooth43",
+        "Tooth42",
+        "Tooth41",
+        "Tooth31",
+        "Tooth32",
+        "Tooth33",
+        "Tooth34",
+        "Tooth35",
+        "Tooth36",
+        "Tooth37",
+        "Tooth38",
+        "PeriapicalPathosis",
+        "Veneer",
+        "OnlayFilling",
+        "InlayFilling",
+        "SupernumeraryTooth",
+        "MandibularTraumaDevice",
+        "TeethApex",
+        "Periodontitis",
+        "PlaceForAttachment",
+        "PlaceForHook",
 };
 
-static const std::string MODEL_NAME = "mrcnn_nchw.uff";
+static const std::string MODEL_NAME = "mrcnn_nchwd.uff";
 static const std::string MODEL_INPUT = "input_image";
 static const Dims3 MODEL_INPUT_SHAPE = IMAGE_SHAPE;
 static const std::vector<std::string> MODEL_OUTPUTS = {"mrcnn_detection", "mrcnn_mask/Sigmoid"};
